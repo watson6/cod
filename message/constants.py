@@ -1,0 +1,21 @@
+# 告警级别
+LEVEL_WARNING = 0
+LEVEL_DANGER = 1
+LEVEL_DISASTER = 2
+
+LEVEL_CHOICES = (
+    (LEVEL_WARNING, '警告'),
+    (LEVEL_DANGER, '危险'),
+    (LEVEL_DISASTER, '灾难')
+)
+# 需要升级的告警级别
+LEVEL_NEED_UPGRADE = [1, 2]
+
+# 告警消息状态
+STATUS_ERROR = 0
+STATUS_RECOVER = 1
+
+STATUS_CHOICES = (
+    (STATUS_ERROR, '告警'),
+    (STATUS_RECOVER, '恢复')
+)
