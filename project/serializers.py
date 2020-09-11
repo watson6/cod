@@ -10,4 +10,4 @@ class ProjectSerializer(TaggitSerializer, serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ['id', 'name', 'type', 'pic', 'tags', 'children']
+        fields = ['id', 'name', 'label', 'type', 'pic', 'tags', 'children']

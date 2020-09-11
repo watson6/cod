@@ -22,7 +22,7 @@ class CustomIndexDashboard(Dashboard):
         site_name = get_admin_site_name(context)
 
         # 第一列: 站点模型
-        self.children.append(modules.AppList(
+        self.children.append(modules.ModelList(
             _('用户自定义模型'),
             collapsible=True,
             column=1,
@@ -31,6 +31,7 @@ class CustomIndexDashboard(Dashboard):
             models=[
                 'account.models.User',
                 'project.models.Project',
+                'auth_token.models.AuthToken',
             ]
         ))
 

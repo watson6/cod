@@ -13,6 +13,7 @@ from utils.taggit.models import TaggedUUIDItem
 class Project(MPTTModel, UUIDModel, OwnerModel, SoftDeletableModel, TimeStampedModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     name = models.CharField(verbose_name='名称', max_length=50)
+    label = models.CharField(verbose_name='标示', max_length=50, unique=True)
     type = models.CharField(verbose_name='类型', max_length=50)
     pic = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='责任人', on_delete=models.CASCADE,
                             related_name='charged_project')
@@ -21,6 +22,9 @@ class Project(MPTTModel, UUIDModel, OwnerModel, SoftDeletableModel, TimeStampedM
 
     class MPTTMeta:
         order_insertion_by = ['name']
+
+    class Meta:
+        verbose_name_plural = verbose_name = '- 项目管理'
 
     def __str__(self):
         return "%s - %s" % (self.type, self.name)

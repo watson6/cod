@@ -44,7 +44,9 @@ INSTALLED_APPS += [
 INSTALLED_APPS += [
     # 自研应用
     'account.apps.AccountConfig',
+    'auth_token.apps.AuthTokenConfig',
     'project.apps.ProjectConfig',
+    'data_source.apps.DataSourceConfig',
 ]
 
 SECRET_KEY = env.get('SECRET_KEY')
