@@ -7,7 +7,6 @@ To activate your index dashboard add the following to your settings.py::
 """
 
 from django.utils.translation import gettext_lazy as _
-from django.urls import reverse
 
 from grappelli.dashboard import modules, Dashboard
 from grappelli.dashboard.utils import get_admin_site_name
@@ -23,7 +22,7 @@ class CustomIndexDashboard(Dashboard):
 
         # 第一列: 站点模型
         self.children.append(modules.ModelList(
-            _('用户自定义模型'),
+            _('>> 用户自定义模型'),
             collapsible=True,
             column=1,
             css_classes=('collapse open',),
@@ -32,6 +31,21 @@ class CustomIndexDashboard(Dashboard):
                 'account.models.User',
                 'project.models.Project',
                 'auth_token.models.AuthToken',
+                'data_source.models.DataSource',
+            ]
+        ))
+
+        # 第一列: 站点模型
+        self.children.append(modules.ModelList(
+            _('>> 收敛规则管理'),
+            collapsible=True,
+            column=1,
+            css_classes=('collapse open',),
+            # 此处添加模型列表
+            models=[
+                'converge.models.BurrConverge',
+                'converge.models.DateTimeConverge',
+                'converge.models.TimeConverge',
             ]
         ))
 

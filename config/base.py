@@ -47,6 +47,7 @@ INSTALLED_APPS += [
     'auth_token.apps.AuthTokenConfig',
     'project.apps.ProjectConfig',
     'data_source.apps.DataSourceConfig',
+    'converge.apps.ConvergeConfig',
 ]
 
 SECRET_KEY = env.get('SECRET_KEY')
