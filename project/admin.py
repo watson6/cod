@@ -20,4 +20,4 @@ class ProjectAdmin(DraggableMPTTAdmin):
         ('标记删除', {'classes': ['grp-collapse grp-open'], 'fields': ['is_removed']}),
     ]
     mptt_level_indent = 20
-    filter_horizontal = ['users']
+    filter_horizontal = ['members', 'subscribers']

@@ -6,7 +6,7 @@ from message.models import Message
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ['project', 'ds', 'host', 'type', 'title', 'level', 'status', 'time', 'created', 'modified']
+    list_display = ['project', 'ds', 'host', 'type', 'title', 'level', 'status', 'created', 'modified']
     list_filter = ['status']
     search_fields = ['project', 'ds', 'host', 'type', 'title', 'raw']
     fieldsets = [

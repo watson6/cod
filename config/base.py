@@ -48,6 +48,9 @@ INSTALLED_APPS += [
     'project.apps.ProjectConfig',
     'data_source.apps.DataSourceConfig',
     'converge.apps.ConvergeConfig',
+    'message.apps.MessageConfig',
+    'event.apps.EventConfig',
+    'silence.apps.SilenceConfig',
 ]
 
 SECRET_KEY = env.get('SECRET_KEY')

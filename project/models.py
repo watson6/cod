@@ -13,11 +13,21 @@ from utils.taggit.models import TaggedUUIDItem
 class Project(MPTTModel, UUIDModel, OwnerModel, SoftDeletableModel, TimeStampedModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     name = models.CharField(verbose_name='名称', max_length=50)
-    label = models.CharField(verbose_name='标示', max_length=50, unique=True)
+    label = models.CharField(verbose_name='标识', max_length=50, unique=True)
     type = models.CharField(verbose_name='类型', max_length=50)
-    pic = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='责任人', on_delete=models.CASCADE,
+    pic = models.ForeignKey(settings.AUTH_USER_MODEL,
+                            verbose_name='责任人',
+                            on_delete=models.CASCADE,
                             related_name='charged_project')
-    users = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='成员', related_name='belong_to_project')
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                     blank=True,
+                                     verbose_name='成员',
+                                     related_name='belong_to_project')
+    subscribers = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                         blank=True,
+                                         verbose_name='订阅',
+                                         related_name='subscribe_project')
+    upgrade_delay = models.PositiveSmallIntegerField(verbose_name='升级延时', default=10)
     tags = TaggableManager(through=TaggedUUIDItem, blank=True)
 
     class MPTTMeta:

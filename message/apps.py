@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class AlertConfig(AppConfig):
+class MessageConfig(AppConfig):
     name = 'message'
     verbose_name = '消息管理'
 
