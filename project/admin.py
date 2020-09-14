@@ -15,7 +15,7 @@ class ProjectAdmin(DraggableMPTTAdmin):
     search_fields = ['name', 'type', 'pic__username', 'owner__username']
     fieldsets = [
         ('基本信息', {'classes': ['grp-collapse grp-open'], 'fields': ['name', 'label', 'type', 'pic', 'owner', 'parent']}),
-        ('成员管理', {'classes': ['grp-collapse grp-open'], 'fields': ['users']}),
+        ('成员管理', {'classes': ['grp-collapse grp-open'], 'fields': ['members', 'subscribers']}),
         ('标签管理', {'classes': ['grp-collapse grp-open'], 'fields': ['tags']}),
         ('标记删除', {'classes': ['grp-collapse grp-open'], 'fields': ['is_removed']}),
     ]

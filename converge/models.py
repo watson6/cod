@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 from utils.common.models import UUIDModel, OwnerModel, DateTimeFramedModel, TimeFramedModel
 from model_utils.choices import Choices
 from utils.common.constants import STATUS_PUBLISHED, STATUS_OFFLINE, STATUS_DRAFT
@@ -18,7 +17,7 @@ class BurrConverge(UUIDModel, OwnerModel, TimeStampedModel, SoftDeletableModel, 
     section = models.PositiveSmallIntegerField(verbose_name='收敛区间', default=5)
     count = models.PositiveSmallIntegerField(verbose_name='收敛阈值', default=3)
     project = models.ForeignKey(Project, verbose_name='收敛项目', on_delete=models.CASCADE)
-    filter_args = JSONField(verbose_name='过滤条件', null=True, blank=True)
+    filter_args = models.TextField(verbose_name='过滤条件', blank=True, null=True)
 
     class Meta:
         verbose_name_plural = verbose_name = '- 毛刺削峰收敛'

@@ -10,4 +10,4 @@ clean:
 	rm -rf silence/migrations
 
 make:
-	python manage.py makemigrations account auth_token data_source converge project silence event
+	python manage.py makemigrations account auth_token data_source converge project silence event message

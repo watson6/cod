@@ -6,7 +6,7 @@ from model_utils.choices import Choices
 from project.models import Project
 from message.models import Message
 from message.constants import LEVEL_CHOICES, LEVEL_WARNING
-from event.constants import STATUS_CONVERGING, STATUS_RESOLVED, STATUS_REVOKED, STATUS_TIMEOUT
+from event.constants import STATUS_NO_RESPONSE, STATUS_PROCESSING, STATUS_RESOLVED, STATUS_REVOKED, STATUS_TIMEOUT
 from converge.models import BurrConverge
 from taggit.managers import TaggableManager
 from utils.taggit.models import TaggedUUIDItem
@@ -16,7 +16,7 @@ from utils.taggit.models import TaggedUUIDItem
 
 class Event(UUIDModel, OwnerModel, DateTimeFramedModel, TimeStampedModel, StatusModel, SoftDeletableModel):
     """告警事件"""
-    STATUS = Choices(STATUS_CONVERGING, STATUS_RESOLVED, STATUS_REVOKED, STATUS_TIMEOUT)
+    STATUS = Choices(STATUS_NO_RESPONSE, STATUS_PROCESSING, STATUS_RESOLVED, STATUS_REVOKED, STATUS_TIMEOUT)
     name = models.CharField(verbose_name='事件名称', max_length=120)
     project = models.ForeignKey(Project, verbose_name='所属项目', on_delete=models.CASCADE)
     host = models.CharField(verbose_name='主机标识', max_length=128)
@@ -30,8 +30,12 @@ class Event(UUIDModel, OwnerModel, DateTimeFramedModel, TimeStampedModel, Status
                                        verbose_name='消息接收人',
                                        related_name='receive_events',
                                        blank=True)
+    responder = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='响应人员', on_delete=models.SET_NULL,
+                                  null=True, blank=True, related_name='respond_event')
+    operators = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='处理人员', related_name='operate_events',
+                                       blank=True)
     converge = models.ForeignKey(BurrConverge, verbose_name='毛刺收敛', on_delete=models.CASCADE)
-    tags = TaggableManager(TaggedUUIDItem, blank=True)
+    tags = TaggableManager(through=TaggedUUIDItem, blank=True)
 
     class Meta:
         verbose_name_plural = verbose_name = '- 告警事件'
